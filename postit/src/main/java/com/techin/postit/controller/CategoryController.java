@@ -1,7 +1,10 @@
 package com.techin.postit.controller;
 
+import com.techin.postit.model.Advertisement;
 import com.techin.postit.model.Category;
+import com.techin.postit.repository.AdvertisementRepository;
 import com.techin.postit.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,9 +16,11 @@ import java.util.Optional;
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
+    private final AdvertisementRepository advertisementRepository;
 
-    public CategoryController(CategoryRepository categoryRepository) {
+    public CategoryController(CategoryRepository categoryRepository, AdvertisementRepository advertisementRepository) {
         this.categoryRepository = categoryRepository;
+        this.advertisementRepository = advertisementRepository;
     }
 
     @PostMapping("/add")
@@ -28,8 +33,15 @@ public class CategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Transactional
     public String deleteCategory(@PathVariable Long id) {
-        if (categoryRepository.findById(id).isPresent()){
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()){
+            Category category = optionalCategory.get();
+            for (Advertisement advertisement : category.getAdvertisements()) {
+                advertisement.setCategory(null);
+                advertisementRepository.save(advertisement);
+            }
             categoryRepository.deleteById(id);
             return "Category deleted successfully";
         }

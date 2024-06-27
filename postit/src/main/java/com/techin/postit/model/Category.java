@@ -26,5 +26,5 @@ public class Category {
             CascadeType.MERGE,
     })
     @JsonIgnore
-    private List<Advertisement> books = new ArrayList<>();
+    private List<Advertisement> advertisements = new ArrayList<>();
 }
