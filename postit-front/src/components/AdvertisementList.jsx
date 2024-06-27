@@ -7,7 +7,7 @@ const AdvertisementList = () => {
     const [advertisements, setAdvertisements] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedAdvertisement, setSelectedAdvertisement] = useState(null);
-
+    const [needRefresh, setNeedRefresh] = useState(false);
     const onEdit = (advertisement) => {
         setSelectedAdvertisement(advertisement);
     };
@@ -45,7 +45,7 @@ const AdvertisementList = () => {
             const response = await axiosInstance.delete(`api/delete/advertisement/${id}`);
             if (response.data === `Advertisement deleted successfully`) {
                 console.log(response.data);
-                setAdvertisements(advertisements.filter(ad => ad.id !== id));
+                setNeedRefresh(prevState => !prevState);
             } else {
                 console.error(response.data);
             }

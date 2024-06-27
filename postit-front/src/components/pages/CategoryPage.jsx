@@ -1,28 +1,27 @@
-import React, {useState} from "react";
+import { useState } from 'react';
+import { Box, Button, Container, Grid, TextField, Typography, Snackbar, Alert } from '@mui/material';
 import axiosInstance from "../utils/axiosInstance.jsx";
-import {
-    Box,
-    Button,
-    Container,
-    Grid,
-    TextField,
-    Typography
-} from "@mui/material";
 
 const CategoryPage = () =>{
     const [category, setCategory] = useState({
         name: "",
     });
-
+    const [open, setOpen] = useState(false);
     const handleChange = (e) => {
         setCategory({...category, name: e.target.value});
     }
-
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axiosInstance.post('/api/category/add', category);
             console.log('Category submitted:', response.data);
+            setOpen(true);
             setCategory({
                 name: '',
             });
@@ -30,7 +29,6 @@ const CategoryPage = () =>{
             console.error('There was an error submitting the category!', error);
         }
     };
-
     return (
         <div>
             <Container maxWidth="sm">
@@ -58,6 +56,11 @@ const CategoryPage = () =>{
                             </Grid>
                         </Grid>
                     </form>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                            Category successfully added!
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Container>
         </div>

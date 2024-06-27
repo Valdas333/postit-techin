@@ -41,6 +41,8 @@ const EditAdvertisementDialog = ({ advertisement, open, onClose }) => {
                 category: localAdvertisement.category.id
             };
             await axiosInstance.put(`api/edit/advertisement/${localAdvertisement.id}`, updatedAdvertisement);
+
+            window.location.reload();
             console.log('Advertisement updated successfully');
             onClose();
         } catch (error) {
