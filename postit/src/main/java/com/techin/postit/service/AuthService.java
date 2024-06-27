@@ -2,6 +2,9 @@ package com.techin.postit.service;
 
 import com.techin.postit.exception.UsernameAlreadyExistsException;
 import com.techin.postit.model.*;
+import com.techin.postit.model.requests.AuthenticationRequest;
+import com.techin.postit.model.requests.RegisterRequest;
+import com.techin.postit.model.response.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

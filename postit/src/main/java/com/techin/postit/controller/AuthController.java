@@ -1,9 +1,9 @@
 package com.techin.postit.controller;
 
 
-import com.techin.postit.model.AuthenticationRequest;
-import com.techin.postit.model.AuthenticationResponse;
-import com.techin.postit.model.RegisterRequest;
+import com.techin.postit.model.requests.AuthenticationRequest;
+import com.techin.postit.model.response.AuthenticationResponse;
+import com.techin.postit.model.requests.RegisterRequest;
 import com.techin.postit.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

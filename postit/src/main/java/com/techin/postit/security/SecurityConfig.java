@@ -36,9 +36,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers( "api/auth/**", "/h2-console/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/api/v1-demo/hello-admin").hasAuthority("ADMIN")
-                                .requestMatchers(HttpMethod.GET, "/api/v1-demo/hello-user").hasAuthority("USER")
-                                .requestMatchers(HttpMethod.POST, "/category/**", "/book/**").hasAuthority("USER")
+//                                ADMIN
+                                .requestMatchers(HttpMethod.PUT, "/api/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
+//                                User
+                                .requestMatchers(HttpMethod.GET, "/api/advertisements").hasAuthority("USER")
                                 .anyRequest()
                                 .authenticated()
                 )

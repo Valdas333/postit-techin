@@ -1,4 +1,4 @@
-package com.techin.postit.model;
+package com.techin.postit.model.response;
 
 public record AuthenticationResponse(String token){
 

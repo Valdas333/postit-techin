@@ -16,8 +16,8 @@ public class Advertisement {
     private Long id;
     private String title;
     private String description;
-    private String City;
-    private Integer Price;
+    private String city;
+    private Integer price;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
