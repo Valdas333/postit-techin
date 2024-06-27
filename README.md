@@ -1,5 +1,4 @@
 # postit
-dependencies:
 Java 21
 Node JS
 
