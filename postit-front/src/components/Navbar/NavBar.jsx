@@ -15,10 +15,10 @@ const Navbar = () => {
 
 
     const handleAddBook = () => {
-       navigate("api/add/advertisement");
+       navigate("add/advertisement");
     };
     const handleAddCategory = () => {
-        navigate("api/category/add")
+        navigate("category/add")
     };
     return (
         <>
@@ -30,7 +30,7 @@ const Navbar = () => {
                     <Button color="inherit" onClick={() => navigate('/home')}>Home</Button>
                     <Button color="inherit" onClick={handleAddBook}>Add Advertisement</Button>
                     <Button color="inherit" onClick={handleAddCategory}>Add Category</Button>
-
+                    <Button color="inherit" onClick={() => navigate("category/all")}>Categories</Button>
                     {isAuthenticated ? (
                         <Button color="inherit" onClick={handleLogout}>
                             Logout
