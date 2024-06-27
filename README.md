@@ -4,7 +4,7 @@ Node JS
 
  
 Starting front-end:
- navigate to postit-front directory: 
+ ## navigate to postit-front directory: 
   cd postit-front
  start page in development mode:
   npm run dev
