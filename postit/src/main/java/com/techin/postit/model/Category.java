@@ -27,8 +27,4 @@ public class Category {
     })
     @JsonIgnore
     private List<Advertisement> books = new ArrayList<>();
-
-    public Category(long id) {
-        this.id = id;
-    }
 }

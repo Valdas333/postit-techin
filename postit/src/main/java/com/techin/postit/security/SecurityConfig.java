@@ -36,12 +36,27 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers( "api/auth/**", "/h2-console/**").permitAll()
+
+//                                advertisements
 //                                ADMIN
                                 .requestMatchers(HttpMethod.PUT, "/api/**").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/api/**").hasAuthority("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
-//                                User
-                                .requestMatchers(HttpMethod.GET, "/api/advertisements").hasAuthority("USER")
+
+//                                User+Admin
+                                .requestMatchers(HttpMethod.GET, "/api/advertisements").hasAnyAuthority(
+                                        "USER","ADMIN")
+
+//                                categories
+//                                ADMIN
+                                .requestMatchers(HttpMethod.POST,"/api/category/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.PUT,"/api/category/**").hasAuthority("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE,"/api/category/delete/**").hasAuthority("ADMIN")
+
+//                                USER
+                                .requestMatchers(HttpMethod.GET,"/api/category/all").hasAnyAuthority(
+                                        "ADMIN", "USER")
+
                                 .anyRequest()
                                 .authenticated()
                 )

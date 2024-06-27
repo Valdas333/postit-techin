@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
+@RequestMapping("/api/category")
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
@@ -17,7 +18,7 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-    @PostMapping("/category/add")
+    @PostMapping("/add")
     public String addCategory(@RequestBody Category category) {
         if (categoryRepository.findByName(category.getName()).isEmpty()){
             categoryRepository.save(category);
@@ -26,7 +27,7 @@ public class CategoryController {
         return "Category already exists";
     }
 
-    @DeleteMapping("/category/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         if (categoryRepository.findById(id).isPresent()){
             categoryRepository.deleteById(id);
@@ -35,9 +36,9 @@ public class CategoryController {
         return "Category not found";
     }
 
-    @PutMapping("/category/update/{id}")
-    public String updateCategory(@PathVariable Long id, @RequestBody Category category) {
-        Optional<Category> existingCategory = categoryRepository.findById(id);
+    @PutMapping("/update/{id}")
+    public String updateCategory(@PathVariable String id, @RequestBody Category category) {
+        Optional<Category> existingCategory = categoryRepository.findById(Long.valueOf(id));
         if (existingCategory.isPresent()) {
             Category updatedCategory = existingCategory.get();
             updatedCategory.setName(category.getName());
@@ -48,7 +49,7 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/category")
+    @GetMapping("/all")
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
